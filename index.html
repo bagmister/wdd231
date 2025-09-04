@@ -24,11 +24,17 @@
 </head>
 <body>
     <header>
-    <img src="images/logo.svg" alt="site logo" width="1" height="1">
+    <img src="images/home.svg" alt="site logo" width="1" height="1">
     <span>Kevin Bagley</span>
-    <button id="nav-button" class="hamburger" aria-label="navigation"></button>
+    <button id="ham-btn" class="hamburger"></button>
     </header>
-    <nav></nav>
+    <nav id="nav-bar" class="navigation">
+        <ul>
+            <li class="current"><a href="#">news & Events</a></li>
+            <li><a href="#">Dedicated Temples</a></li>
+            <li><a href="#">Announced Temples</a></li>
+        </ul>
+    </nav>
     <main>
         <div class="pageHeading"></div>
         <div id="map" role="region" aria-label="Interactive map showing bird migration and national parks" style="height: 500px;"></div>

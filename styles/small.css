@@ -5,13 +5,54 @@
 
 @media (max-width:320) {
     header {
-    display: grid;
-    grid-template-columns: 24px auto 44px;
+        display: grid;
+        grid-template-columns: 24px auto 44px;
+        padding: 5px 0 5px 10px;
+        align-items: end;
+        border-bottom: solid 1px #ddd;
+        column-gap: 8px;
     }
+
+    header img {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding-bottom: 5px;
+    }
+
+    header span {
+        font-size: 1.2rem;
+        color: bisque;
+    }
+
+    .hamberger {
+        color: none;
+        border: none;
+        color: bisque;
+        cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .hamberger::after {
+        content: "\2630";
+        font-size: 2rem;
+    }
+
     .hamburger::before {
-    content: "\2630";
+        content: "\2630";
     }
+
     .hamburger.show::before {
-    content: "\00D7";
+        content: "\00D7";
     }
+
+    .navigation {
+        display: none;
+    }
+
+    .navigation.show {
+        display: block;
+    }
+
+    .navigation ul {display: flex;}
 }
