@@ -54,5 +54,29 @@
         display: block;
     }
 
-    .navigation ul {display: flex;}
+    .navigation ul {
+        list-style-type: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navigation a {
+        display: block;
+        padding: .8rem 10px;
+        color: aquamarine;
+        text-decoration: none;
+    }
+
+    .navigation a:hover {
+        background-color: blueviolet;
+    }
+
+    .navigation li.current {
+        background-color: bisque;
+    }
+
+    h1 {
+        margin-left: 10px;
+    }
 }
