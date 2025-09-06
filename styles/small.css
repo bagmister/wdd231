@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-@media (max-width:320) {
+@media (max-width:480px) {
     header {
         display: grid;
         grid-template-columns: 24px auto 44px;

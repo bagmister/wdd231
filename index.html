@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kevin Bagley - WDD 231 - Web Frontend Development</title>
     <meta name="description" content="WDD 231 - Web Frontend Development. Kevin Bagley Course">
     <meta name="author" content="Kevin Bagley">
-    <link rel="icon" href=""> 
-    <link rel="stylesheet" href="styles/normalize.css"/>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/small.css" />
-    <link rel="stylesheet" href="styles/larger.css" /> 
-     <script src="scripts/navigation.js" defer></script>
+    <link rel="stylesheet" href="styles/larger.css" />
+    <script src="scripts/navigation.js" defer></script>
     <script src="scripts/date.js" defer></script>
     <script src="scripts/course.js" defer></script>
     <meta property="og:title" content="WDD-231">
@@ -22,11 +23,12 @@
     <meta name="twitter:image" content="">
     <meta name="twitter:card" content="">
 </head>
+
 <body>
     <header>
-    <img src="images/home.svg" alt="site logo" width="1" height="1">
-    <span>Kevin Bagley</span>
-    <button id="ham-btn" class="hamburger"></button>
+        <img src="images/home.svg" alt="site logo" width="1" height="1">
+        <span>Kevin Bagley</span>
+        <button id="ham-btn" class="hamburger"></button>
     </header>
     <nav id="nav-bar" class="navigation">
         <ul>
@@ -37,10 +39,25 @@
     </nav>
     <main>
         <div class="pageHeading"></div>
-        <div id="map" role="region" aria-label="Interactive map showing bird migration and national parks" style="height: 500px;"></div>
+        <div id="map" role="region" aria-label="Interactive map showing bird migration and national parks"
+            style="height: 500px;">
+
+        </div>
     </main>
-     <footer>
-        <div class="footerForPage"></div>
+    <footer>
+        <div class="social">
+            <a href="https://facebook.com" target="_blank"><img src="images/facebook.svg" alt="facebook" width="16"
+                    height="16"></a>
+            <a href="https://linkedin.com" target="_blank"><img src="images/linkedin.svg" alt="Linkedin" width="16"
+                    height="16"></a>
+            <a href="https://x.com" target="_blank"><img src="images/twitter-x.svg" alt="twitter-x" width="16"
+                    height="16"></a>
+            <a href="https://github.com" target="_blank"><img src="images/github.svg" alt="github" width="16"
+                    height="16"></a>
+        </div>
+        <p>&copy; <span id="currentyear"></span> Kevin Bagley, United States of America</p>
+        <p id="lastModified">Last Modified</p>
     </footer>
 </body>
+
 </html>

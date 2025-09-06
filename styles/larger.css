@@ -1,4 +1,4 @@
-@media only screen and (min-width: 38rem) {
+@media only screen and (min-width: 481px) {
 
     header,
     main,
@@ -10,12 +10,28 @@
 
     header {
         grid-template-columns: 24px auto;
+        display: grid;
+        padding: 5px 0 5px 10px;
+        align-items: end;
+        border-bottom: solid 1px #ddd;
+        column-gap: 8px;
     }
 
+    header img {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding-bottom: 5px;
+    }
+
+    header span {
+        font-size: 1.2rem;
+        color: bisque;
+    }
     .hamberger {
         display: none;
     }
-
+    
     .navigation {
         display: block;
     }
