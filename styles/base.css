@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 24px auto 44px;
+    padding: 5px 0 5px 10px;
+    align-items: end;
+    border-bottom: solid 1px #ddd;
+    column-gap: 8px;
+}
+
+header span {
+    padding-left: 10px;
+    font-size: 1.2rem;
+    font-family: "UnifrakturMaguntia", cursive;
+    color: rgb(0, 7, 144);
+}
+
+header img {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 5px;
+}
+
+.navigation {
+    display: block;
+}
+
+.navigation.show {
+    display: block;
+}
+
+.navigation ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation a {
+    display: block;
+    padding: .8rem 10px;
+    color: rgb(0, 16, 164);
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    background-color: rgb(251, 255, 0);
+    font-family: "New Rocker", system-ui;
+}
+
+.navigation li.current {
+    background-color: bisque;
+}
+
+#nav-header-text {
+    padding: .8rem 10px;
+    background-color: rgb(145, 214, 16);
+    box-shadow: 2px 2px;
+    font-family: "New Rocker", system-ui;
+}
+
+footer {
+    padding: .8rem 10px;
+    background-color: bisque;
+    justify-items: center;
+}
+
+.card {
+    background-color: bisque;
+    text-shadow: #ddd;
+}
+
+h2 {
+    padding: .8rem 10px;
+    font-family: "New Rocker", system-ui;
+    background-color: rgb(39, 201, 242);
+    box-shadow: 2px 2px;
+}
+
+#about-me-picture {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20%;
+    object-fit: fill;
+}
+
+#about-me-text {
+    text-size-adjust: 1.2rem;
+}
+
+.course-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: .8rem 10px;
+    width: 100%;
+}
+
+.filter-btn {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #4a4a4a;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.filter-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.filter-btn[data-filter="all"] {
+    background-color: #6cf371;
+    color: rgb(0, 0, 0);
+    border-color: #6cf371;
+}
+
+.filter-btn[data-filter="all"]:hover {
+    background-color: forestgreen;
+}
+
+.filter-btn[data-filter="WDD"] {
+    background-color: #2196F3;
+    color: rgb(0, 0, 0);
+    border-color: #1e87db;
+}
+
+.filter-btn[data-filter="WDD"]:hover {
+    background-color: #1e87db;
+}
+
+.filter-btn[data-filter="CSE"] {
+    background-color: #ff9800;
+    color: rgb(0, 0, 0);
+    border-color: #e68900;
+}
+
+.filter-btn[data-filter="CSE"]:hover {
+    background-color: #e68900;
+}
+
+.course-count {
+    padding: .8rem 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    background-color:  rgb(39, 201, 242);
+}
+
+.course-list {
+    padding: .8rem 10px;
+    display: grid;
+    gap: 20px;
+    background-color: bisque;
+}
+
+.course-card {
+    padding: .8rem 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.course-card h3 {
+    margin: 0 0 10px;
+    font-family: "Story Script", sans-serif;
+    font-size: 20px;
+    color: #333;
+}
+
+.completed {
+    color: #4CAF50;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.course-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.course-card p strong {
+    color: #333;
+}
