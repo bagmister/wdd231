@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: aqua;
+    padding: 1rem;
+    width: 100%;
+    font-family: "Kaushan Script", cursive;
+    justify-content: center;
+    align-items: center;
+}
+
+#navigation {
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    background-color: #E7C081;
+}
+
+#navigation a:hover {
+    background-color: #5f58e4;
+    color: #ffffff;
+}
+
+main {
+    display: block;
+    margin-top: 2rem;
+}
+
+h1 {
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    font-family: "Kaushan Script", cursive;
+    background-color: #5f58e4;
+}
+
+#contactUs {
+    justify-content: space-evenly;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    width: 100%;
+    font-family: "Kaushan Script", cursive;
+    justify-content: center;
+    align-items: center;
+    background-color: #E7C081;
+}
+
+.informationSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.card {
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F0F0C9;
+    font-weight: 400;
+    font-style: normal;
+    width: 90%;
+    margin: 0.5rem;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.hero-image{
+    width: 100%;
+    height: auto;
+    padding: 2%;
+}
+
+.call-to-action{
+    padding-left: .6rem;
+}
+
+.call-to-action-button{
+    border-radius: .5rem;
+    height: 42px;
+    width: 96%;
+}
+
+.call-to-action-button:hover{
+    color: white;
+    background-color: #5f58e4;
+}
+
+#currentEventsData {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 5px;
+    align-items: center;
+}
+
+#currentEventsData section {
+    text-align: center;
+}
+
+#currentEventsData img{
+    border: 1px solid #fff;
+    box-shadow: 0 0 10px #333;
+}
+
+#currentEventsData section > * {
+    margin: 0.1rem;
+}
+
+#currentEventsData h3 {
+    font-family: "Caveat", cursive;
+}
+
+#currentEventsData section img {
+    height: 75px;
+    max-width: 100%;
+}
+
+.menu {
+    margin: 1rem auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    background-color: #E7C081;
+    text-align: center;
+}
+
+.menu button {
+    padding: 1rem;
+    font-weight: 700;
+}
+
+section {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    background-color: #eee;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 5px;
+    align-items: center;
+}
+
+.grid section {
+    text-align: center;
+}
+
+.grid img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 10px #333;
+}
+
+.grid section > * {
+    margin: 0.1rem;
+}
+
+.grid h3 {
+    font-family: "Caveat", cursive;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list section {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    margin: 0;
+    padding: 0.25rem;
+}
+
+.list section > * {
+    margin: 0 1rem;
+}
+
+.list section img {
+    display: none;
+}
+
+.list section h3 {
+    font-size: 1rem;
+    font-family: Roboto, Helvetica, sans-serif;
+}
+
+.list section:nth-child(even) {
+    background-color: #E7C081;
+}
+
+section h3 {
+    font-size: 1.5rem;
+}
+
+section p {
+    font-weight: 600;
+    font-size: smaller;
+}
+
+section a {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 0.85rem;
+    color: navy;
+    letter-spacing: 1.1pt;
+}
+
+article section img {
+    height: 75px;
+    max-width: 100%;
+}
+
+#weatherforcast {
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+#weatherforcastBlock {
+    padding-left: 2rem;
+}
+
+.hero-image {
+    height: auto;
+    max-width: fit-content;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magna Chamber of Commerce Discover</title>
+    <meta name="description" content="WDD 231 - Web Frontend Development. Chamber of Commerce Discoverpage">
+    <meta name="author" content="Kevin Bagley">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/larger.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="scripts/footer.js" defer></script>
+    <script src="scripts/getDates.js" defer></script>
+    <meta property="og:title" content="About me">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bagmister.github.io/wdd230/chanmber">
+    <meta property="og:image" content="https://pics4.city-data.com/cpicv/vfiles13516.jpg">
+    <meta name="twitter:title" content="About me">
+    <meta name="twitter:description" content="WDD 231 - Web Frontend Development. Chamber of Commerce Discoverpage">
+    <meta name="twitter:image" content="images/myPhoto-resized.png">
+    <meta name="twitter:card" content="images/myPhoto-resized.png">
+</head>
+
+<body>
+    <h1>Discover Manga!</h1>
+    <header>
+        <nav id="navigation">
+            <a href="index.html">Home</a>
+            <a href="discover.html">Discover</a>
+            <a href="directory.html">Directory</a>
+        </nav>
+    </header>
+    <main>
+        <div class="discoverPage">
+            <div class="sidebarSection">
+                <section class="card">
+                    <div id="currentEvents">
+                        <h2>Current Event(s)</h2>
+                        <div id="calendar">Calendar</div>
+                        <div id="numberOfVisits">number of visits</div>
+                    </div>
+                </section>
+                <section class="card">
+                    <div id="upComingEvents">
+                        <h2>up comming events</h2>
+                        <ul>
+                            <li><a href="#">Easter Egg Hunt</a></li>
+                            <li><a href="https://magna.utah.gov/171/City-Council">City Council</a></li>
+                            <li><a href="https://magna.utah.gov/254/Events">4th of July Celebration</a></li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="card">
+                    <div id="pointsOfInterest">
+                        <h2>points of interest</h2>
+                        <ul class="spotlightsList">
+                            <li><a href="https://magnautah.org/places-to-visit/ethnic-and-mining-museum/">Magna Museum</a></li>
+                            <li><a href="https://stateparks.utah.gov/parks/great-salt-lake/">Great Salt Lake State Park</a></li>
+                            <li><a href="https://thesaltair.com/">Saltair</a></li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="card">
+                    <div id="demographics">
+                        <h2>Demographics</h2>
+                        <div id="demographicsInfo"></div>
+                    </div>
+                </section>
+            </div>
+            <div id="pictureReel">
+                <picture>
+                    <img src="images/empressriders.webp" alt="4th of jully" loading="lazy">
+                </picture>
+                <picture>
+                    <img src="images/empressTheater.webp" alt="Emperess Theater" loading="lazy">
+                </picture>
+                <picture>
+                    <img src="images/Fslide10-1.webp" alt="Great Salt Lake marina" loading="lazy">
+                </picture>
+                <picture>
+                    <img src="images/Fslide10-2.webp" alt="Great Salt Lake" loading="lazy">
+                </picture>
+                <picture>
+                    <img src="images/Fslide10-5.webp" alt="Great Salt Lake Sunset" loading="lazy">
+                </picture>
+                <picture>
+                    <img src="images/Saltair-2002-exterior-MCB.webp" alt="Saltair exterior" loading="lazy">
+                </picture>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; <span id="currentyear"></span> Kevin Bagley, United States of America</p>
+        <p id="lastModified"></p>
+        <section id="contactUs">
+            <a href="#">Contact us</a>
+            <a href="https://x.com" target="_blank" class="fa-brands fa-x-twitter">X</a>
+            <a href="https://facebook.com" target="_blank" class="fa-brands facebook">fb</a>
+        </section>
+    </footer>
+</body>
+
+</html>

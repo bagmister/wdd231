@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magna Chamber of Commerce Join</title>
+    <meta name="description" content="WDD 231 - Web Frontend Development. Chamber of Commerce Join">
+    <meta name="author" content="Kevin Bagley">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/larger.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Silkscreen:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="scripts/footer.js" defer></script>
+    <script src="scripts/getDates.js" defer></script>
+    <script src="scripts/hamberger.js" defer></script>
+    <meta property="og:title" content="chamber of commerce">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bagmister.github.io/wdd230/">
+    <meta property="og:image" content="chamber/images/MagnaLogo.png">
+    <meta name="twitter:title" content="chamber of commerce">
+    <meta name="twitter:description"
+        content="WDD 231 - Web Frontend Development. Kevin Bagley Chamber of commerce project.">
+    <meta name="twitter:image" content="chamber/images/MagnaLogo.png">
+    <meta name="twitter:card" content="chamber/images/MagnaLogo.pngg">
+</head>
+
+<body>
+    <header>
+        <nav id="navigation">
+            <a href="index.html">Home</a>
+            <a href="discover.html">Discover</a>
+            <a href="directory.html">Directory</a>
+        </nav>
+    </header>
+    <img class="hero-image" src="images/ViewofGreatsaltlakeMagna.jpg" alt="Magna center of commerce.">
+    <main>
+        <h1>Join the Chamber!</h1>
+        <form id="accountForm" action="thankyou.html" class="joinPage">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <br><br>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <br><br>
+
+            <label for="titlePosition">Title or Position:</label>
+            <input type="text" id="titlePosition" name="titlePosition" pattern="[a-zA-Z]+ [a-zA-Z]+">
+            <br><br>
+
+            <label for="email">Email (must be from byui.edu domain):</label>
+            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@byui\.edu"
+                title="Please enter a valid BYUI email address (e.g., example@byui.edu)"
+                placeholder="example@byui.edu">
+            <br><br>
+
+            <label>Phone</label>
+            <input type="tel" id="phone" name="phone" title="Please enter a valid email address"
+                placeholder="8011234567">
+            <br><br>
+
+            <label for="businessOrganization">business/organization's name:</label>
+            <input type="text" id="businessOrganization" name="businessOrganization" required>
+            <br><br>
+
+            <div>Membership Level</div>
+            <label><input type="radio" name="memmbershipLevel"
+                    value="NP Membership is for non profit organizations and there is no fee">Non-Profit</label>
+            <label><input type="radio" name="memmbershipLevel" value="BronzeMembership">Bronze Membership</label>
+            <label><input type="radio" name="memmbershipLevel" value="SilverMembership">Silver Membership</label>
+            <label><input type="radio" name="memmbershipLevel" value="GoldMembership">Gold Membership</label>
+            <br><br>
+
+            <label for="description">Business/Organization's Description:</label>
+            <textarea id="description" name="description" required></textarea>
+            <br><br>
+
+            <label><input type="hidden" id="timestamp" name="timestamp"></label>
+            
+
+            <button type="submit">Join the Chamber</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; <span id="currentyear"></span> Kevin Bagley, United States of America</p>
+        <p id="lastModified">Last Modified</p>
+    </footer>
+</body>
+
+</html>
