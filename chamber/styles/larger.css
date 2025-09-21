@@ -2,7 +2,8 @@
     header img {
         scale: 1.2;
     }
-        .discoverPage {
+
+    .discoverPage {
         display: grid;
         grid-template-columns: 2fr 5fr;
         grid-template-rows: auto;
@@ -99,7 +100,7 @@
         font-size: .9rem;
     }
 
-      .discoverPage {
+    .discoverPage {
         display: flex;
         flex-direction: column;
     }
@@ -109,33 +110,52 @@
         height: auto;
         max-width: 100%;
     }
+
     .list {
         display: flex;
         flex-direction: column;
     }
-    
+
     .list section {
         display: grid;
         grid-template-columns: 2fr 1fr 1fr;
         margin: 0;
         padding: 0.25rem;
     }
-    
-    .list section > * {
+
+    .list section>* {
         margin: 0 1rem;
     }
-    
+
     .list section img {
         display: none;
     }
-    
+
     .list section h3 {
         font-size: 1rem;
         font-family: Roboto, Helvetica, sans-serif;
     }
-    
+
     .list section:nth-child(even) {
         background-color: #E7C081;
     }
-    
+
+    .hero-image {
+        height: auto;
+        max-width: 100%;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    #weatherforcastBlock {
+        justify-items: center;
+        padding-left: 2rem;
+    }
+
+    #weather {
+        justify-items: center;
+    }
+
 }

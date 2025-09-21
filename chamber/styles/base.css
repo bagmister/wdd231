@@ -32,7 +32,7 @@ header {
 
 main {
     display: block;
-    margin-top: 2rem;
+    padding: .8rem 10px;
 }
 
 h1 {
@@ -65,7 +65,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    padding: 1rem;
+    padding: .8rem 10px;
     box-sizing: border-box;
 }
 
@@ -83,25 +83,37 @@ footer {
     box-sizing: border-box;
 }
 
-.hero-image{
+#spotlights {
+    justify-items: center;
+}
+
+#spotlights h2 {
+    padding: .8rem;
+}
+
+.hero-image {
     width: 100%;
     height: auto;
-    padding: 2%;
+    padding: .8rem 10px;
 }
 
-.call-to-action{
-    padding-left: .6rem;
+.call-to-action {
+    padding: .8rem 10px;
 }
 
-.call-to-action-button{
+.call-to-action-button {
     border-radius: .5rem;
     height: 42px;
     width: 96%;
 }
 
-.call-to-action-button:hover{
+.call-to-action-button:hover {
     color: white;
     background-color: #5f58e4;
+}
+
+#currentEvents {
+    text-align: center;
 }
 
 #currentEventsData {
@@ -112,16 +124,14 @@ footer {
 }
 
 #currentEventsData section {
+    margin: 0.1rem;
     text-align: center;
 }
 
-#currentEventsData img{
+#currentEventsData img {
     border: 1px solid #fff;
     box-shadow: 0 0 10px #333;
-}
-
-#currentEventsData section > * {
-    margin: 0.1rem;
+    scale: 70%;
 }
 
 #currentEventsData h3 {
@@ -134,9 +144,9 @@ footer {
 }
 
 .menu {
-    margin: 1rem auto;
+    margin: 0 0 10px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.5rem;
+    padding: .8rem 10px;
     background-color: #E7C081;
     text-align: center;
 }
@@ -168,7 +178,7 @@ section {
     box-shadow: 0 0 10px #333;
 }
 
-.grid section > * {
+.grid section>* {
     margin: 0.1rem;
 }
 
@@ -188,7 +198,7 @@ section {
     padding: 0.25rem;
 }
 
-.list section > * {
+.list section>* {
     margin: 0 1rem;
 }
 
@@ -227,16 +237,23 @@ article section img {
 }
 
 #weatherforcast {
-    padding-left: 2rem;
     display: flex;
     flex-direction: row;
+    justify-items: center;
 }
 
 #weatherforcastBlock {
+    justify-items: center;
     padding-left: 2rem;
 }
 
+#weather {
+    justify-items: center;
+}
+
 .hero-image {
+    padding: 0%;
     height: auto;
     max-width: fit-content;
+    scale: 90%;
 }
