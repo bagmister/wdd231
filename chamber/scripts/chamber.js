@@ -2,7 +2,7 @@ const currentEventsData = document.querySelector("#currentEventsData")
 const membersURL = "https://bagmister.github.io/wdd230/chamber/data/members.json";
 
 document.querySelector('.call-to-action-button').addEventListener('click', function () {
-    window.location.href = '/chamber/join.html';
+    window.location.href = './join.html';
 });
 
 async function getMembers() {

@@ -1,7 +1,8 @@
 const currentTemp = document.querySelector('#current-temp');
 const weatherIcon = document.querySelector('#weather-icon');
 const captionDesc = document.querySelector('figcaption');
-const forecastDiv = document.querySelector('#weatherforcast');
+const forecastDiv = document.querySelector('#weatherforcastBlock');
+const weatherSingle = document.querySelector('#weather');
 const url = 'https://api.openweathermap.org/data/2.5/weather?lat=40.71&lon=-112.10&units=imperial&appid=e1a74b86df31d3f79449799eb8ed7845';
 const forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=40.71&lon=-112.10&units=imperial&appid=e1a74b86df31d3f79449799eb8ed7845';
 
