@@ -1,0 +1,36 @@
+{
+    "events": [
+        {
+            "name": "Fourth of July Celebration Breakfast",
+            "address": "Copper hill park Magna, Utah 84044",
+            "phoneNumber": "(801) 205-6563",
+            "url": "https://thingy.com",
+            "contactName": "Billy Bob",
+            "registrationRequired": true
+        },
+                {
+            "name": "City Council",
+            "address": "Webster Center Magna, Utah 84044",
+            "phoneNumber": "(801) 205-6563",
+            "url": "https://thingy.com",
+            "contactName": "Sir Bob of Weaselton",
+            "registrationRequired": false
+        },
+                {
+            "name": "Fourth of July Celebration Parade",
+            "address": "Main street Magna, Utah 84044",
+            "phoneNumber": "(801) 205-6563",
+            "url": "https://thingy.com",
+            "contactName": "Sir Billy of the house of Bob",
+            "registrationRequired": false
+        },
+                {
+            "name": "Fourth of July Celebration Car Show",
+            "address": "Copper hill park Magna, Utah 84044",
+            "phoneNumber": "(801) 205-6563",
+            "url": "https://thingy.com",
+            "contactName": "Billy Bob",
+            "registrationRequired": false
+        }
+    ]
+}
