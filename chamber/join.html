@@ -41,48 +41,53 @@
     <main>
         <h1>Join the Chamber!</h1>
         <form id="accountForm" action="thankyou.html" class="joinPage">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required>
+            <label for="firstName">First Name:
+                <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+            </label>
             <br><br>
 
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
             <br><br>
 
             <label for="titlePosition">Title or Position:</label>
-            <input type="text" id="titlePosition" name="titlePosition" pattern="[a-zA-Z]+ [a-zA-Z]+">
+            <input type="text" id="titlePosition" name="titlePosition" pattern="[a-zA-Z]+ [a-zA-Z]+"
+                autocomplete="organization-title">
             <br><br>
 
-            <label for="email">Email (must be from byui.edu domain):</label>
-            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@byui\.edu"
-                title="Please enter a valid BYUI email address (e.g., example@byui.edu)"
-                placeholder="example@byui.edu">
+            <label for="email">Email:
+                <input type="email" id="email" name="email" required
+                    pattern="[a-zA-Z0-9._%+-]+[@a-zA-Z0-9._%+-]+\.[a-zA-Z]+"
+                    title="Please enter a valid email address (e.g., example@byui.edu)" placeholder="example@byui.edu"
+                    autocomplete="email">
+            </label>
             <br><br>
 
-            <label>Phone</label>
-            <input type="tel" id="phone" name="phone" title="Please enter a valid email address"
-                placeholder="8011234567">
+            <label for="Phone">Phone
+                <input type="tel" id="phone" name="phone" title="Please enter a vaild mobile phone number"
+                    placeholder="8011234567" autocomplete="tel-local-prefix" required>
+            </label>
             <br><br>
 
-            <label for="businessOrganization">business/organization's name:</label>
-            <input type="text" id="businessOrganization" name="businessOrganization" required>
+            <label for="businessOrganization">business/organization's name:
+                <input type="text" id="businessOrganization" name="businessOrganization" required
+                    autocomplete="organization">
+            </label>
             <br><br>
 
             <div>Membership Level</div>
-            <label><input type="radio" name="memmbershipLevel"
+            <label for="memmbershipLevel"><input type="radio" name="memmbershipLevel"
                     value="NP Membership is for non profit organizations and there is no fee">Non-Profit</label>
             <label><input type="radio" name="memmbershipLevel" value="BronzeMembership">Bronze Membership</label>
             <label><input type="radio" name="memmbershipLevel" value="SilverMembership">Silver Membership</label>
             <label><input type="radio" name="memmbershipLevel" value="GoldMembership">Gold Membership</label>
             <br><br>
 
-            <label for="description">Business/Organization's Description:</label>
-            <textarea id="description" name="description" required></textarea>
+            <label for="description">Business/Organization's Description:
+                <textarea id="description" name="description" required></textarea>
+            </label>
             <br><br>
-
             <label><input type="hidden" id="timestamp" name="timestamp"></label>
-            
-
             <button type="submit">Join the Chamber</button>
         </form>
     </main>
