@@ -27,10 +27,12 @@ function displayPlaces(places) {
     let image = document.createElement('img');
     let cost = document.createElement('p');
     let description = document.createElement('p');
+    let address = document.createElement('p');
 
     name.textContent = place.name;
     cost.textContent = `Cost: ${place.cost}`; // Populate cost
     description.textContent = place.description;
+    address.textContent = place.address;
 
     image.setAttribute('src', place.image_url);
     image.setAttribute('alt', `Image of ${place.name}`);
@@ -40,6 +42,7 @@ function displayPlaces(places) {
     card.appendChild(image);
     card.appendChild(cost);
     card.appendChild(description);
+    card.appendChild(address);
 
     cards.appendChild(card);
   });

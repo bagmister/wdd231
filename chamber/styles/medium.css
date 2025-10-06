@@ -1,13 +1,14 @@
-@media (min-width:1025px) {
+@media (min-width:451px) {
     header img {
         scale: 1.2;
     }
 
-    .discoverPage {
+    /* .discoverPage {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 2fr 5fr;
+        grid-template-rows: auto;
         grid-gap: 1rem;
-    }
+    } */
 
     #pictureReel {
         display: flex;
@@ -99,6 +100,11 @@
         font-size: .9rem;
     }
 
+    .discoverPage {
+        display: flex;
+        flex-direction: column;
+    }
+
     #pictureReel picture img {
         width: 100%;
         height: auto;
@@ -112,7 +118,7 @@
 
     .list section {
         display: grid;
-        
+
 
         grid-template-columns: 2fr 1fr 1fr;
         margin: 0;
@@ -169,8 +175,15 @@
 
     }
 
-        #card img {
-        width: 500px;
+    #card {
+        grid-template-areas:
+            "image name"
+            "image cost"
+            "image description"
+            "image address";
+    }
+    #card img {
+        width: 400px;
         scale: 80%;
     }
 

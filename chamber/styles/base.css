@@ -269,41 +269,46 @@ article section img {
     filter: drop-shadow(8px 8px 10px);
 }
 
-#cards section {
+#card {
   display: grid;
   grid-template-areas:
-    "image"
     "name"
+    "image"
     "cost"
-    "description";
+    "description"
+    "address";
   gap: 10px;
   padding: 15px;
-  background-color: #f9f9f9; /* Light background for cards */
+  background-color: #f9f9f9; /* Light background for card */
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-#cards img {
+#card img {
   grid-area: image;
   width: 100%;
-  height: 420px; /* Match your specified height */
-  object-fit: cover; /* Ensure images fit nicely */
+  height: 420px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
-#cards h2 {
+#card h2 {
   grid-area: name;
   margin: 0;
   font-size: 1.5rem;
 }
 
-#cards p:nth-of-type(1) {
+#card p:nth-of-type(1) {
   grid-area: cost;
   margin: 0;
   font-weight: bold;
 }
 
-#cards p:nth-of-type(2) {
+#card p:nth-of-type(2) {
   grid-area: description;
+  margin: 0;
+}
+#card p:nth-of-type(3) {
+  grid-area: address;
   margin: 0;
 }
