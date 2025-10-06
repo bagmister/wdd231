@@ -41,7 +41,7 @@
     .joinPage input[type="number"] {
         color: lightgray;
         display: block;
-        border: solid 1px color gray;
+        border: solid 1px gray;
         border-radius: 6px;
         padding: .75rem;
         color: darkgray;
