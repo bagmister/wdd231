@@ -1,0 +1,65 @@
+@media only screen and (min-width: 481px) {
+
+    header,
+    main,
+    nav,
+    footer {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    header img {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding-bottom: 5px;
+    }
+
+    .hamberger {
+        display: none;
+    }
+
+    #ham-btn {
+        display: none;
+    }
+
+    .navigation a {
+        color: none;
+        border: none;
+        color: rgb(0, 16, 164);
+        cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    #about-me-section {
+        border-radius: 10%;
+        width: 100%;
+        height: 75%;
+        align-items: center;
+        display: flex;
+    }
+
+    .card {
+        flex: 1;
+        height: 90%;
+        text-align: center;
+        border-radius: 10%;
+        margin: 5px 10px;
+    }
+
+    #about-me-picture {
+        scale: .8;
+    }
+
+    #about-me-text {
+        font-size: 1.6rem;
+    }
+
+    .filter-btn {
+        margin-right: 20px;
+        min-width: 120px;
+        max-width: 270px;
+    }
+
+
+}
