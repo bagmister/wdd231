@@ -43,8 +43,22 @@
         </ul>
     </nav>
     <main>
-        <h1 id="nav-header-text">Scheduled Maintenance intervals</h1>
-        <div id="schedule-section"></div>
+        <h1 id="nav-header-text">Scheduled Maintenance Intervals</h1>
+        <div id="schedule-section">
+            <label for="vehicleSelect">Select Vehicle:</label>
+            <select id="vehicleSelect">
+                <option value="">Select a vehicle</option>
+            </select>
+            <div id="serviceTiles" class="service-tiles"></div>
+        </div>
+        <div id="serviceModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('serviceModal')">&times;</span>
+                <h2>Service Tasks</h2>
+                <div id="serviceDetails"></div>
+                <button onclick="saveServiceChecklist()">Save Checklist</button>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="social">

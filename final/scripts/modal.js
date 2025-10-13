@@ -1,135 +1,275 @@
 let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
 
-// Service intervals (in miles) and tasks
-const serviceIntervals = [
-    { mileage: 5000, tasks: ['Oil Change', 'Tire Rotation'] },
-    { mileage: 10000, tasks: ['Oil Change', 'Air Filter Check', 'Brake Inspection'] },
-    { mileage: 30000, tasks: ['Oil Change', 'Tire Rotation', 'Brake Fluid Flush'] },
-    // Add more intervals as needed
-];
+const vinBaseUrl = 'https://vpic.nhtsa.dot.gov/api/vehicles/';
 
+const serviceIntervals = Array.from({ length: 40 }, (_, index) => {
+    const mileage = (index + 1) * 5000;
+    const tasks = ['Oil Change', 'Tire Rotation'];
+    if (mileage % 10000 === 0) {
+        tasks.push('Inspect Brakes', 'Inspect Windshield Wiper Blades', 'Check Tires and Brakes');
+    }
+    if (mileage % 20000 === 0) {
+        tasks.push('Change Brake Fluid');
+    }
+    if (mileage % 30000 === 0) {
+        tasks.push('Change Coolant', 'Change Cabin Air Filter');
+    }
+    if (mileage % 40000 === 0) {
+        tasks.push('Change Transmission Fluid');
+    }
+    if (mileage % 100000 === 0) {
+        tasks.push('Change Timing Chain', 'Change Spark Plugs');
+    }
+    return { mileage, tasks };
+});
 
+document.addEventListener('DOMContentLoaded', () => {
+    vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+    const vehicleForm = document.getElementById('vehicleForm');
+    const vinInput = document.getElementById('vin');
+    const addVehicleBtn = document.getElementById('addVehicleBtn');
 
+    if (vehicleForm) {
+        vehicleForm.addEventListener('submit', handleFormSubmit);
+    }
+    if (vinInput) {
+        vinInput.addEventListener('input', toggleAdditionalFields);
+    }
+    if (addVehicleBtn) {
+        addVehicleBtn.addEventListener('click', openAddVehicleModal);
+    }
 
-// Open modal
-function openAddVehicleModal() {
-    window.onload = function () {
-        if (!localStorage.getItem('modalShown')) {
-            document.getElementById('addVehicleModal').style.display = 'block';
+    if (window.location.pathname.includes('index.html')) {
+        if (vehicles.length === 0) {
+            openAddVehicleModal();
         }
-    };
-    document.getElementById('addVehicleModal').style.display = 'flex';
-    document.getElementById('vehicleForm').reset();
-    toggleAdditionalFields();
+        updateVehicleList();
+    } else if (window.location.pathname.includes('schedule.html')) {
+        initializeSchedulePage();
+    }
+});
+
+async function getVin(vin) {
+    if (!vin || vin.length !== 17) return null;
+    try {
+        const response = await fetch(`${vinBaseUrl}DecodeVinValuesExtended/${vin}?format=json`);
+        if (!response.ok) throw new Error('API request failed');
+        const data = await response.json();
+        if (data.Results && data.Results.length > 0 && data.Results[0].ErrorCode === '0') {
+            return data.Results[0];
+        } else {
+            throw new Error('Invalid VIN or API error');
+        }
+    } catch (error) {
+        console.error('VIN fetch error:', error);
+        alert('Failed to fetch VIN data. Please enter details manually.');
+        return null;
+    }
 }
 
-// Close modal
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+function initializeSchedulePage() {
+    const vehicleSelect = document.getElementById('vehicleSelect');
+    if (vehicleSelect) {
+        populateVehicleSelect();
+        vehicleSelect.addEventListener('change', () => updateServiceTiles(vehicleSelect.value));
+    }
+    updateServiceTiles(vehicleSelect?.value || '');
 }
 
-// Toggle additional fields based on VIN input
-function toggleAdditionalFields() {
-    const vinInput = document.getElementById('vin').value.trim();
-    const additionalFields = document.getElementById('additionalFields');
-    additionalFields.style.display = vinInput ? 'none' : 'block';
-    const inputs = additionalFields.querySelectorAll('input');
-    inputs.forEach(input => input.required = !vinInput);
+function populateVehicleSelect() {
+    const vehicleSelect = document.getElementById('vehicleSelect');
+    if (!vehicleSelect) return;
+    vehicleSelect.innerHTML = '<option value="">Select a vehicle</option>';
+    vehicles.forEach(vehicle => {
+        const option = document.createElement('option');
+        option.value = vehicle.vin || vehicle.id;
+        option.textContent = `${vehicle.Make || 'Vehicle'} ${vehicle.Model || vehicle.vin || vehicle.id} (${vehicle.mileage} miles)`;
+        vehicleSelect.appendChild(option);
+    });
 }
 
-// Handle form submission for adding vehicle
-document.getElementById('vehicleForm').addEventListener('submit', function (e) {
+function updateServiceTiles(vinOrId) {
+    const serviceTiles = document.getElementById('serviceTiles');
+    if (!serviceTiles) return;
+    serviceTiles.innerHTML = '';
+
+    if (!vinOrId) return;
+    const vehicle = vehicles.find(v => v.vin === vinOrId || v.id.toString() === vinOrId);
+    if (!vehicle) return;
+
+    const relevantIntervals = serviceIntervals.filter(interval => interval.mileage >= vehicle.mileage);
+    relevantIntervals.forEach(interval => {
+        const tile = document.createElement('div');
+        tile.className = 'service-tile';
+        const allTasksCompleted = interval.tasks.every(task =>
+            vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed)
+        );
+        if (allTasksCompleted) tile.classList.add('completed');
+
+        tile.innerHTML = `
+            <h3>${interval.mileage} Miles</h3>
+            <ul>
+                ${interval.tasks.map(task => {
+                    const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
+                    return `<li>${task}${isCompleted ? ' (Done)' : ''}</li>`;
+                }).join('')}
+            </ul>
+        `;
+        tile.onclick = () => openServiceModal(vehicle.vin || vehicle.id, interval.mileage);
+        serviceTiles.appendChild(tile);
+    });
+}
+
+function openAddVehicleModal() {
+    const modal = document.getElementById('addVehicleModal');
+    const form = document.getElementById('vehicleForm');
+    if (modal && form) {
+        modal.style.display = 'flex';
+        form.reset();
+        toggleAdditionalFields();
+    }
+}
+
+async function handleFormSubmit(e) {
     e.preventDefault();
-    const mileage = document.getElementById('mileage').value;
-    const vin = document.getElementById('vin').value.trim();
-    const vehicle = {
-        id: Date.now(), // Unique ID
-        mileage: parseInt(mileage),
+    const mileageInput = document.getElementById('mileage');
+    const vin = document.getElementById('vin')?.value.trim();
+    const mileage = parseInt(mileageInput?.value);
+
+    if (isNaN(mileage) || mileage < 0) {
+        alert('Please enter a valid mileage.');
+        return;
+    }
+
+    let vehicleData = {
+        id: Date.now(),
+        mileage,
         vin: vin || null,
-        year: vin ? null : document.getElementById('year').value,
-        make: vin ? null : document.getElementById('make').value,
-        model: vin ? null : document.getElementById('model').value,
-        manufacturer: vin ? null : document.getElementById('manufacturer').value,
-        trim: vin ? null : document.getElementById('trim').value,
-        serviceHistory: [] // Store completed tasks
+        serviceHistory: []
     };
-    vehicles.push(vehicle);
+
+    if (vin) {
+        const carinfo = await getVin(vin);
+        if (carinfo) {
+            vehicleData.ModelYear = carinfo.ModelYear;
+            vehicleData.Make = carinfo.Make;
+            vehicleData.Model = carinfo.Model;
+            vehicleData.Manufacturer = carinfo.Manufacturer;
+            vehicleData.Trim = carinfo.Trim;
+        }
+    } else {
+        vehicleData.ModelYear = document.getElementById('year')?.value;
+        vehicleData.Make = document.getElementById('make')?.value;
+        vehicleData.Model = document.getElementById('model')?.value;
+        vehicleData.Manufacturer = document.getElementById('manufacturer')?.value;
+        vehicleData.Trim = document.getElementById('trim')?.value;
+    }
+
+    vehicles.push(vehicleData);
     saveVehicles();
     closeModal('addVehicleModal');
     updateVehicleList();
-});
+    populateVehicleSelect();
+}
 
-// Save vehicles to localStorage
+function toggleAdditionalFields() {
+    const vinInput = document.getElementById('vin')?.value.trim();
+    const additionalFields = document.getElementById('additionalFields');
+    if (additionalFields) {
+        additionalFields.style.display = vinInput ? 'none' : 'block';
+        const inputs = additionalFields.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.required = !vinInput;
+        });
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+}
+
 function saveVehicles() {
     localStorage.setItem('vehicles', JSON.stringify(vehicles));
 }
 
-// Update vehicle list display
 function updateVehicleList() {
     const vehicleList = document.getElementById('vehicles');
-    if (!vehicleList == null) {
+    if (vehicleList) {
         vehicleList.innerHTML = '';
         vehicles.forEach(vehicle => {
             const div = document.createElement('div');
             div.className = 'vehicle-item';
-            div.textContent = `${vehicle.make || 'Vehicle'} ${vehicle.model || vehicle.vin || vehicle.id} - ${vehicle.mileage} miles`;
-            div.onclick = () => openServiceModal(vehicle.id);
+            div.textContent = `${vehicle.Make || 'Vehicle'} ${vehicle.Model || vehicle.vin || vehicle.id} - ${vehicle.mileage} miles`;
+            div.onclick = () => openServiceModal(vehicle.vin || vehicle.id, null);
             vehicleList.appendChild(div);
         });
     }
-    else {
-        localStorage.setItem('vehicle-list', [])
+}
+
+function openServiceModal(vinOrId, mileage) {
+    const vehicle = vehicles.find(v => v.vin === vinOrId || v.id.toString() === vinOrId);
+    if (!vehicle) return;
+
+    const interval = mileage
+        ? serviceIntervals.find(i => i.mileage === mileage)
+        : serviceIntervals.find(i => i.mileage > vehicle.mileage) || serviceIntervals[serviceIntervals.length - 1];
+    if (!interval) return;
+
+    const serviceDetails = document.getElementById('serviceDetails');
+    if (serviceDetails) {
+        serviceDetails.innerHTML = `
+            <p><strong>Vehicle:</strong> ${vehicle.Make || 'Vehicle'} ${vehicle.Model || vehicle.vin || vehicle.id}</p>
+            <p><strong>Current Mileage:</strong> ${vehicle.mileage}</p>
+            <p><strong>Service Interval:</strong> ${interval.mileage} miles</p>
+            <h3>Tasks:</h3>
+            <ul>
+                ${interval.tasks.map(task => {
+                    const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
+                    return `
+                        <li>
+                            <input type="checkbox" data-task="${task}" ${isCompleted ? 'checked' : ''}>
+                            ${task}
+                        </li>
+                    `;
+                }).join('')}
+            </ul>
+        `;
+        const serviceModal = document.getElementById('serviceModal');
+        if (serviceModal) {
+            serviceModal.style.display = 'flex';
+            serviceModal.dataset.vehicleId = vinOrId;
+            serviceModal.dataset.mileage = interval.mileage;
+        }
     }
 }
 
-// Open service modal
-function openServiceModal(vehicleId) {
-    const vehicle = vehicles.find(v => v.id === vehicleId);
-    if (!vehicle) return;
-    const nextInterval = serviceIntervals.find(i => i.mileage > vehicle.mileage) || serviceIntervals[serviceIntervals.length - 1];
-    const serviceDetails = document.getElementById('serviceDetails');
-    serviceDetails.innerHTML = `
-        <p><strong>Current Mileage:</strong> ${vehicle.mileage}</p>
-        <p><strong>Next Service Interval:</strong> ${nextInterval.mileage} miles</p>
-        <h3>Tasks:</h3>
-        <ul>
-            ${nextInterval.tasks.map(task => `
-                <li>
-                    <input type="checkbox" data-task="${task}" ${vehicle.serviceHistory.includes(task) ? 'checked' : ''}>
-                    ${task}
-                </li>
-            `).join('')}
-        </ul>
-    `;
-    document.getElementById('serviceModal').style.display = 'flex';
-    document.getElementById('serviceModal').dataset.vehicleId = vehicleId;
-}
-
-// Save service checklist
 function saveServiceChecklist() {
-    const vehicleId = parseInt(document.getElementById('serviceModal').dataset.vehicleId);
-    const vehicle = vehicles.find(v => v.id === vehicleId);
+    const serviceModal = document.getElementById('serviceModal');
+    if (!serviceModal) return;
+    const vinOrId = serviceModal.dataset.vehicleId;
+    const mileage = parseInt(serviceModal.dataset.mileage);
+    const vehicle = vehicles.find(v => v.vin === vinOrId || v.id.toString() === vinOrId);
     if (!vehicle) return;
+
+    const interval = serviceIntervals.find(i => i.mileage === mileage);
+    if (!interval) return;
+
     const checkboxes = document.querySelectorAll('#serviceDetails input[type="checkbox"]');
-    vehicle.serviceHistory = [];
+    const currentDate = new Date().toISOString().split('T')[0];
+    vehicle.serviceHistory = vehicle.serviceHistory.filter(h => h.mileage !== mileage);
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-            vehicle.serviceHistory.push(checkbox.dataset.task);
+            vehicle.serviceHistory.push({
+                mileage,
+                task: checkbox.dataset.task,
+                completed: true,
+                date: currentDate
+            });
         }
     });
+
     saveVehicles();
     closeModal('serviceModal');
+    updateServiceTiles(vinOrId);
 }
-
-// Event listener for VIN input to toggle fields
-document.getElementById('vin').addEventListener('input', toggleAdditionalFields);
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.pathname.includes("index.html")) {
-        if (localStorage.getItem('vehicles') == null || !localStorage.getItem('vehicles').length > 0) {
-            openAddVehicleModal();
-        }
-    }
-});
-// Initialize vehicle list on page load
-updateVehicleList();

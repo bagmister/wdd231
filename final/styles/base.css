@@ -235,6 +235,10 @@ h2 {
     margin-bottom: 10px;
 }
 
+#additionalFields {
+    display: block;
+}
+
 .modal-content button {
     cursor: pointer;
 }
@@ -257,4 +261,66 @@ h2 {
 
 .vehicle-item:hover {
     background: #f0f0f0;
+}
+
+.service-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.service-tile {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.service-tile:hover {
+    transform: scale(1.05);
+}
+
+.service-tile.completed {
+    background: #d4edda;
+}
+
+.service-tile h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.service-tile ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-tile li {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#vehicleSelect {
+    margin: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+#addVehicleBtn {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#addVehicleBtn:hover {
+    background-color: #0056b3;
 }
