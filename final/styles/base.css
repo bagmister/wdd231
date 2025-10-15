@@ -324,3 +324,38 @@ h2 {
 #addVehicleBtn:hover {
     background-color: #0056b3;
 }
+
+.vehicle-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    background: #f9f9f9; /* Backdrop under card */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.vehicle-card:hover {
+    transform: scale(1.05);
+}
+
+.vehicle-card img {
+    max-width: 200px;
+    height: auto;
+}
+
+.vehicle-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vehicle-details h2,
+.vehicle-details p {
+    margin: 0.25rem 0;
+}

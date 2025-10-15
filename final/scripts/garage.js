@@ -1,42 +1,86 @@
-const welcome = document.querySelector('#welcome-section');
-
-const cards = document.querySelector('#cards');
-
+const garageSection = document.querySelector('#garage-section');
 
 async function getGarageData() {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.table(data.prophets);
-    displayGarage(data)
+    const data = localStorage.getItem('vehicles');
+    const vehicles = JSON.parse(data) || [];
+    displayGarage(vehicles);
 }
 
-function displayGarage(prophets) {
-    let prophetsRefined = prophets.prophets
-    prophetsRefined.forEach(prophet => {
-        let card = document.createElement("section")
-        let fullName = document.createElement("h2")
-        let portrait = document.createElement("img")
-        let dateOfBirth = document.createElement("p")
-        let birthPlace = document.createElement("p")
+function displayGarage(vehicles) {
+    garageSection.innerHTML = ''; // Clear existing content
+    vehicles.forEach(vehicle => {
+        const card = document.createElement('section');
+        card.classList.add('vehicle-card');
 
-        fullName.textContent = `${prophet.name} ${prophet.lastname}`;
-        dateOfBirth.textContent = `${prophet.birthdate}`;
-        birthPlace.textContent = `${prophet.birthplace}`;
+        const image = document.createElement('img');
+        const type = vehicle.type || 'default';
+        const imageSrc = setImage(type);
+        image.src = imageSrc;
+        image.alt = `Image for ${vehicle.Make || 'Vehicle'} ${vehicle.Model || ''}`;
+        image.loading = 'lazy';
+        image.width = 340;
+        image.height = 420;
 
-        portrait.setAttribute('src', prophet.imageurl);
-        portrait.setAttribute('alt', `Portrait of ${prophet.name} ${prophet.lastname}`);
-        portrait.setAttribute('loading', 'lazy');
-        portrait.setAttribute('width', '340');
-        portrait.setAttribute('height', '420');
-        // portrait.setAttribute()
-        card.appendChild(fullName);
-        card.appendChild(dateOfBirth)
-        card.appendChild(birthPlace)
-        card.appendChild(portrait);
+        const details = document.createElement('div');
+        details.classList.add('vehicle-details');
 
-        cards.appendChild(card)
+        const year = document.createElement('h2');
+        year.textContent = vehicle.ModelYear || 'Unknown Year';
+
+        const make = document.createElement('p');
+        make.textContent = `Make: ${vehicle.Make || 'Unknown'}`;
+
+        const model = document.createElement('p');
+        model.textContent = `Model: ${vehicle.Model || 'Unknown'}`;
+
+        const trim = document.createElement('p');
+        trim.textContent = `Trim: ${vehicle.Trim || 'N/A'}`;
+
+        const vin = document.createElement('p');
+        vin.textContent = `VIN: ${vehicle.vin || 'N/A'}`;
+
+        const mileage = document.createElement('p');
+        mileage.textContent = `Mileage: ${vehicle.mileage || 0} miles`;
+
+        details.appendChild(year);
+        details.appendChild(make);
+        details.appendChild(model);
+        details.appendChild(trim);
+        details.appendChild(vin);
+        details.appendChild(mileage);
+
+        card.appendChild(image);
+        card.appendChild(details);
+
+        garageSection.appendChild(card);
     });
 }
 
-getGarageData()
+function setImage(type) {
+    let imagestring = '';
+    switch (type) {
+        case 'suv':
+            imagestring = './images/SuvStock.png';
+            break;
+        case 'truck':
+            imagestring = './images/TruckStock.png';
+            break;
+        case 'sedan':
+            imagestring = './images/SedanStock.png';
+            break;
+        case 'minivan':
+            imagestring = './images/MinivanStock.png';
+            break;
+        case 'van':
+            imagestring = './images/VanStock.png';
+            break;
+        case 'sportsCar':
+            imagestring = './images/SportsCarStock.png';
+            break;
+        default:
+            imagestring = './images/DefaultStock.png';
+    }
+    return imagestring;
+}
 
+getGarageData();

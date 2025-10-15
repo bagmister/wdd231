@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVehicleList();
     } else if (window.location.pathname.includes('schedule.html')) {
         initializeSchedulePage();
+    } else if (window.location.pathname.includes('garage.html')) {
+        // No additional init needed, garage.js handles display
     }
 });
 
@@ -71,9 +73,14 @@ function initializeSchedulePage() {
     const vehicleSelect = document.getElementById('vehicleSelect');
     if (vehicleSelect) {
         populateVehicleSelect();
-        vehicleSelect.addEventListener('change', () => updateServiceTiles(vehicleSelect.value));
+        vehicleSelect.addEventListener('change', (e) => {
+            updateServiceTiles(e.target.value);
+            showNextServiceModal(e.target.value);
+        });
     }
+    // Trigger for initial select if value exists
     updateServiceTiles(vehicleSelect?.value || '');
+    showNextServiceModal(vehicleSelect?.value || '');
 }
 
 function populateVehicleSelect() {
@@ -120,6 +127,23 @@ function updateServiceTiles(vinOrId) {
     });
 }
 
+function showNextServiceModal(vinOrId) {
+    if (!vinOrId) return;
+    const vehicle = vehicles.find(v => v.vin === vinOrId || v.id.toString() === vinOrId);
+    if (!vehicle || !vehicle.serviceHistory || vehicle.serviceHistory.length === 0) return; // Only show if serviceHistory populated
+
+    const nextInterval = serviceIntervals.find(interval => {
+        if (interval.mileage < vehicle.mileage) return false;
+        return !interval.tasks.every(task =>
+            vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed)
+        );
+    });
+
+    if (nextInterval) {
+        openServiceModal(vinOrId, nextInterval.mileage);
+    }
+}
+
 function openAddVehicleModal() {
     const modal = document.getElementById('addVehicleModal');
     const form = document.getElementById('vehicleForm');
@@ -156,6 +180,24 @@ async function handleFormSubmit(e) {
             vehicleData.Model = carinfo.Model;
             vehicleData.Manufacturer = carinfo.Manufacturer;
             vehicleData.Trim = carinfo.Trim;
+
+            // Map BodyClass to type
+            const bodyClass = (carinfo.BodyClass || '').toLowerCase();
+            if (bodyClass.includes('sport utility')) {
+                vehicleData.type = 'suv';
+            } else if (bodyClass.includes('truck')) {
+                vehicleData.type = 'truck';
+            } else if (bodyClass.includes('sedan')) {
+                vehicleData.type = 'sedan';
+            } else if (bodyClass.includes('minivan')) {
+                vehicleData.type = 'minivan';
+            } else if (bodyClass.includes('van')) {
+                vehicleData.type = 'van';
+            } else if (bodyClass.includes('coupe') || bodyClass.includes('convertible')) {
+                vehicleData.type = 'sportsCar';
+            } else {
+                vehicleData.type = 'default';
+            }
         }
     } else {
         vehicleData.ModelYear = document.getElementById('year')?.value;
@@ -163,6 +205,8 @@ async function handleFormSubmit(e) {
         vehicleData.Model = document.getElementById('model')?.value;
         vehicleData.Manufacturer = document.getElementById('manufacturer')?.value;
         vehicleData.Trim = document.getElementById('trim')?.value;
+        // For manual entry, type could be added via a new form field, but assuming 'default' for now
+        vehicleData.type = 'default';
     }
 
     vehicles.push(vehicleData);
