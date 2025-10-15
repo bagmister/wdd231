@@ -329,7 +329,7 @@ h2 {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1rem;
-    background: #f9f9f9; /* Backdrop under card */
+    background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
