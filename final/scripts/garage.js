@@ -60,25 +60,25 @@ function setImage(type) {
     let imagestring = '';
     switch (type) {
         case 'suv':
-            imagestring = './images/SuvStock.png';
+            imagestring = './images/SuvStock.webp';
             break;
         case 'truck':
-            imagestring = './images/TruckStock.png';
+            imagestring = './images/TruckStock.webp';
             break;
         case 'sedan':
-            imagestring = './images/SedanStock.png';
+            imagestring = './images/SedanStock.webp';
             break;
         case 'minivan':
-            imagestring = './images/MinivanStock.png';
+            imagestring = './images/MinivanStock.webp';
             break;
         case 'van':
-            imagestring = './images/VanStock.png';
+            imagestring = './images/VanStock.webp';
             break;
         case 'sportsCar':
-            imagestring = './images/SportsCarStock.png';
+            imagestring = './images/SportsCarStock.webp';
             break;
         default:
-            imagestring = './images/DefaultStock.png';
+            imagestring = './images/SedanStock.webp';
     }
     return imagestring;
 }

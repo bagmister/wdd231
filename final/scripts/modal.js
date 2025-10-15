@@ -260,17 +260,18 @@ function openServiceModal(vinOrId, mileage) {
     const serviceDetails = document.getElementById('serviceDetails');
     if (serviceDetails) {
         serviceDetails.innerHTML = `
+            <br>
             <p><strong>Vehicle:</strong> ${vehicle.Make || 'Vehicle'} ${vehicle.Model || vehicle.vin || vehicle.id}</p>
             <p><strong>Current Mileage:</strong> ${vehicle.mileage}</p>
             <p><strong>Service Interval:</strong> ${interval.mileage} miles</p>
             <h3>Tasks:</h3>
+            <br>
             <ul>
                 ${interval.tasks.map(task => {
             const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
             return `
                         <li>
-                            <input type="checkbox" data-task="${task}" ${isCompleted ? 'checked' : ''}>
-                            ${task}
+                            ${task}      <input type="checkbox" data-task="${task}" ${isCompleted ? 'checked' : ''}>
                         </li>
                     `;
         }).join('')}

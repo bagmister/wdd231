@@ -72,6 +72,10 @@ footer {
     font-family: "Germania One";
 }
 
+footer a:hover {
+    color: #4CAF50;
+}
+
 .card {
     background-color: bisque;
     text-shadow: #ddd;
