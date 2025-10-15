@@ -25,7 +25,7 @@ function displayGarage(vehicles) {
         details.classList.add('vehicle-details');
 
         const year = document.createElement('h2');
-        year.textContent = vehicle.ModelYear || 'Unknown Year';
+        year.textContent = vehicle.ModelYear || 0;
 
         const make = document.createElement('p');
         make.textContent = `Make: ${vehicle.Make || 'Unknown'}`;

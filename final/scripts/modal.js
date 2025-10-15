@@ -78,7 +78,6 @@ function initializeSchedulePage() {
             showNextServiceModal(e.target.value);
         });
     }
-    // Trigger for initial select if value exists
     updateServiceTiles(vehicleSelect?.value || '');
     showNextServiceModal(vehicleSelect?.value || '');
 }
@@ -117,9 +116,9 @@ function updateServiceTiles(vinOrId) {
             <h3>${interval.mileage} Miles</h3>
             <ul>
                 ${interval.tasks.map(task => {
-                    const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
-                    return `<li>${task}${isCompleted ? ' (Done)' : ''}</li>`;
-                }).join('')}
+            const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
+            return `<li>${task}${isCompleted ? ' (Done)' : ''}</li>`;
+        }).join('')}
             </ul>
         `;
         tile.onclick = () => openServiceModal(vehicle.vin || vehicle.id, interval.mileage);
@@ -130,7 +129,7 @@ function updateServiceTiles(vinOrId) {
 function showNextServiceModal(vinOrId) {
     if (!vinOrId) return;
     const vehicle = vehicles.find(v => v.vin === vinOrId || v.id.toString() === vinOrId);
-    if (!vehicle || !vehicle.serviceHistory || vehicle.serviceHistory.length === 0) return; // Only show if serviceHistory populated
+    if (!vehicle || !vehicle.serviceHistory || vehicle.serviceHistory.length === 0) return;
 
     const nextInterval = serviceIntervals.find(interval => {
         if (interval.mileage < vehicle.mileage) return false;
@@ -181,19 +180,18 @@ async function handleFormSubmit(e) {
             vehicleData.Manufacturer = carinfo.Manufacturer;
             vehicleData.Trim = carinfo.Trim;
 
-            // Map BodyClass to type
             const bodyClass = (carinfo.BodyClass || '').toLowerCase();
-            if (bodyClass.includes('sport utility')) {
+            if (bodyClass.includes('sport utility', 'suv')) {
                 vehicleData.type = 'suv';
-            } else if (bodyClass.includes('truck')) {
+            } else if (bodyClass.includes('truck', 'pick')) {
                 vehicleData.type = 'truck';
-            } else if (bodyClass.includes('sedan')) {
+            } else if (bodyClass.includes('sedan', 'car')) {
                 vehicleData.type = 'sedan';
-            } else if (bodyClass.includes('minivan')) {
+            } else if (bodyClass.includes('minivan', 'mpv')) {
                 vehicleData.type = 'minivan';
-            } else if (bodyClass.includes('van')) {
+            } else if (bodyClass.includes('van', 'wagon')) {
                 vehicleData.type = 'van';
-            } else if (bodyClass.includes('coupe') || bodyClass.includes('convertible')) {
+            } else if (bodyClass.includes('coupe', 'convertible')) {
                 vehicleData.type = 'sportsCar';
             } else {
                 vehicleData.type = 'default';
@@ -205,7 +203,6 @@ async function handleFormSubmit(e) {
         vehicleData.Model = document.getElementById('model')?.value;
         vehicleData.Manufacturer = document.getElementById('manufacturer')?.value;
         vehicleData.Trim = document.getElementById('trim')?.value;
-        // For manual entry, type could be added via a new form field, but assuming 'default' for now
         vehicleData.type = 'default';
     }
 
@@ -269,14 +266,14 @@ function openServiceModal(vinOrId, mileage) {
             <h3>Tasks:</h3>
             <ul>
                 ${interval.tasks.map(task => {
-                    const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
-                    return `
+            const isCompleted = vehicle.serviceHistory.some(h => h.mileage === interval.mileage && h.task === task && h.completed);
+            return `
                         <li>
                             <input type="checkbox" data-task="${task}" ${isCompleted ? 'checked' : ''}>
                             ${task}
                         </li>
                     `;
-                }).join('')}
+        }).join('')}
             </ul>
         `;
         const serviceModal = document.getElementById('serviceModal');
